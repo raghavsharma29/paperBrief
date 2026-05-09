@@ -3,12 +3,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-
-const SearchPage = () => (
-  <div className="p-8">
-    <h1 className="text-2xl font-bold">Search Page — coming soon</h1>
-  </div>
-);
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
