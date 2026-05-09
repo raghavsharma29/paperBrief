@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 dotenv.config();
+console.log('MONGO_URI:', process.env.MONGO_URI);
 
 const app = express();
 
@@ -12,7 +13,10 @@ app.use(express.json());
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
+const searchRoutes = require('./routes/searchRoutes');
+
 app.use('/api/auth', authRoutes);
+app.use('/api/search', searchRoutes);
 
 // Health check
 app.get('/', (req, res) => {
@@ -21,6 +25,7 @@ app.get('/', (req, res) => {
 
 const connectDB = async () => {
   try {
+    await mongoose.disconnect();
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connected');
   } catch (error) {
