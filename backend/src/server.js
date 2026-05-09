@@ -4,7 +4,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 dotenv.config();
-console.log('MONGO_URI:', process.env.MONGO_URI);
 
 const app = express();
 
@@ -25,7 +24,6 @@ app.get('/', (req, res) => {
 
 const connectDB = async () => {
   try {
-    await mongoose.disconnect();
     await mongoose.connect(process.env.MONGO_URI);
     console.log('MongoDB connected');
   } catch (error) {
