@@ -26,7 +26,7 @@ const summarizePaper = async (title, abstract) => {
                         role: 'user',
                         content: `Summarize this research paper and return a JSON object with exactly these fields:
                         - summary: array of exactly 5 strings (cover: problem, method, findings, limitations, use case)
-                        - relevanceScore: number from 1 to 10 based on how impactful and clearly written this paper is
+                        - relevanceScore: number from 1 to 10. Score based on: clarity of problem statement (1-3), significance of findings (1-4), practical applicability (1-3). Add them up for the final score. Never return 0 unless abstract is completely empty.
                         - oneLiner: one sentence plain English summary of the paper
 
                         Title: ${title}
