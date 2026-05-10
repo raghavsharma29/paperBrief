@@ -1,6 +1,13 @@
 # PaperBrief 📚
 
-An AI-powered research paper assistant that helps you find, summarize, and organize academic papers — built for students and researchers who are tired of reading through dozens of abstracts manually.
+An AI-powered research paper assistant that helps you find and summarize academic papers — built for students and researchers who are tired of reading through dozens of abstracts manually.
+
+## Live Demo
+
+- **Frontend:** https://paperbrief-rag.vercel.app
+- **Backend:** https://paperbrief-backend.onrender.com
+
+> Note: Backend is hosted on Render's free tier and may take 30-60 seconds to wake up on first request.
 
 ## Problem
 
@@ -8,16 +15,15 @@ Finding relevant research papers is time-consuming. You search a topic, get floo
 
 ## Solution
 
-PaperBrief lets you search for papers by topic, generates a 5-point AI summary for each one, scores its relevance to your query, and lets you save papers with your own notes for future reference.
+PaperBrief lets you search for papers by topic and generates a 5-point AI summary for each one — covering the problem, method, findings, limitations, and use case — along with a relevance score and a one-line plain English summary.
 
 ## Features
 
-- 🔍 Search papers by topic using Semantic Scholar API
-- 🤖 AI summarization — get 5 bullet points + a one-liner for any paper
+- 🔍 Search papers by topic using OpenAlex API (200M+ papers)
+- 🤖 AI summarization — 5 bullet points + one-liner for any paper
 - 📊 Relevance score (1–10) for each paper
-- 📁 Personal library — save papers with your own notes
-- 📄 Export your library as a formatted text file
-- 🔐 JWT-based authentication — every user has their own library
+- 🔗 Direct links to papers
+- 🔐 JWT-based authentication
 
 ## Tech Stack
 
@@ -25,10 +31,50 @@ PaperBrief lets you search for papers by topic, generates a 5-point AI summary f
 |---|---|
 | Frontend | React, Vite, Tailwind CSS |
 | Backend | Node.js, Express |
-| Database | MongoDB Atlas, Mongoose |
+| Database | MongoDB Atlas |
 | AI | Groq API (llama-3.3-70b-versatile) |
-| Papers | Semantic Scholar API |
+| Papers | OpenAlex API |
 | Auth | JWT (jsonwebtoken, bcryptjs) |
+| Deployment | Vercel (frontend), Render (backend) |
+
+## Project Structure
+
+paperbrief/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   │   ├── authController.js
+│   │   │   └── searchController.js
+│   │   ├── middleware/
+│   │   │   └── authMiddleware.js
+│   │   ├── models/
+│   │   │   └── User.js
+│   │   ├── routes/
+│   │   │   ├── authRoutes.js
+│   │   │   └── searchRoutes.js
+│   │   ├── utils/
+│   │   │   ├── groqApi.js
+│   │   │   └── scholarApi.js
+│   │   └── server.js
+│   ├── .env.example
+│   └── package.json
+└── frontend/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── PaperCard.jsx
+│   │   └── ProtectedRoute.jsx
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   ├── pages/
+│   │   ├── LoginPage.jsx
+│   │   ├── RegisterPage.jsx
+│   │   └── SearchPage.jsx
+│   ├── utils/
+│   │   └── api.js
+│   └── App.jsx
+├── .env.example
+└── package.json
 
 ## Setup Instructions
 
@@ -43,6 +89,7 @@ PaperBrief lets you search for papers by topic, generates a 5-point AI summary f
 cd backend
 npm install
 cp .env.example .env
+# Fill in your values in .env
 node src/server.js
 ```
 
@@ -52,13 +99,13 @@ node src/server.js
 cd frontend
 npm install
 cp .env.example .env
+# Fill in your values in .env
 npm run dev
 ```
 
 ## Environment Variables
 
 **backend/.env.example**
-
 PORT=5000
 MONGO_URI=
 JWT_SECRET=
@@ -76,7 +123,3 @@ VITE_API_URL=http://localhost:5000
 | GET | /api/auth/me | Get current user | Yes |
 | GET | /api/search?q= | Search papers | Yes |
 | POST | /api/search/summarize | AI summarize a paper | Yes |
-| GET | /api/library | Get saved papers | Yes |
-| POST | /api/library | Save a paper | Yes |
-| PATCH | /api/library/:id | Update note | Yes |
-| DELETE | /api/library/:id | Remove paper | Yes |
