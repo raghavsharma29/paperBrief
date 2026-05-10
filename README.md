@@ -37,45 +37,6 @@ PaperBrief lets you search for papers by topic and generates a 5-point AI summar
 | Auth | JWT (jsonwebtoken, bcryptjs) |
 | Deployment | Vercel (frontend), Render (backend) |
 
-## Project Structure
-
-paperbrief/
-├── backend/
-│   ├── src/
-│   │   ├── controllers/
-│   │   │   ├── authController.js
-│   │   │   └── searchController.js
-│   │   ├── middleware/
-│   │   │   └── authMiddleware.js
-│   │   ├── models/
-│   │   │   └── User.js
-│   │   ├── routes/
-│   │   │   ├── authRoutes.js
-│   │   │   └── searchRoutes.js
-│   │   ├── utils/
-│   │   │   ├── groqApi.js
-│   │   │   └── scholarApi.js
-│   │   └── server.js
-│   ├── .env.example
-│   └── package.json
-└── frontend/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── PaperCard.jsx
-│   │   └── ProtectedRoute.jsx
-│   ├── context/
-│   │   └── AuthContext.jsx
-│   ├── pages/
-│   │   ├── LoginPage.jsx
-│   │   ├── RegisterPage.jsx
-│   │   └── SearchPage.jsx
-│   ├── utils/
-│   │   └── api.js
-│   └── App.jsx
-├── .env.example
-└── package.json
-
 ## Setup Instructions
 
 ### Prerequisites
